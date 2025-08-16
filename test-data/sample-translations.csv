@@ -1,0 +1,9 @@
+path,description,en,es,fr
+common.buttons.save,Save button text,Save,Guardar,Enregistrer
+common.buttons.cancel,Cancel button text,Cancel,Cancelar,Annuler
+common.buttons.submit,Submit button text,Submit,Enviar,Soumettre
+common.labels.name,Name field label,Name,Nombre,Nom
+common.labels.email,Email field label,Email,Correo electrónico,Email
+common.messages.welcome,Welcome message,Welcome to our app!,¡Bienvenido a nuestra aplicación!,Bienvenue dans notre application!
+common.messages.error,Generic error message,An error occurred,Se produjo un error,Une erreur s'est produite
+common.messages.success,Success message,Operation completed successfully,Operación completada con éxito,Opération terminée avec succès

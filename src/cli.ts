@@ -9,7 +9,7 @@ const command = args[0];
 
 function showHelp(): void {
   console.log(`
-🌐 @sanchay/i18n-csv-generator
+🌐 @bhushan001/i18n-csv-generator
 
 Usage: i18n-generator <command> [options]
 
@@ -69,7 +69,7 @@ async function main(): Promise<void> {
   try {
     const options = parseArgs(args.slice(1));
 
-    if (options.help || options.h || !command) {
+    if (options.help || options.h || !command || command === '--help' || command === '-h') {
       showHelp();
       return;
     }
