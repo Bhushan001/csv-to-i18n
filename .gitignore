@@ -96,6 +96,9 @@ jspm_packages/
 # Test files
 test-translations.csv
 test-output/
+test-data/
+test-package.js
+test.js
 
 # Temporary files
 *.tmp
