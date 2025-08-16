@@ -5,6 +5,83 @@ import { CsvRow, ParsedCsvData } from './types';
 
 export class CsvParser {
   /**
+   * Map common language names to standard ISO codes
+   */
+  private static languageCodeMap: { [key: string]: string } = {
+    'eng': 'en',
+    'english': 'en',
+    'en': 'en',
+    'es': 'es',
+    'spanish': 'es',
+    'esp': 'es',
+    'fr': 'fr',
+    'french': 'fr',
+    'fra': 'fr',
+    'de': 'de',
+    'german': 'de',
+    'deu': 'de',
+    'it': 'it',
+    'italian': 'it',
+    'ita': 'it',
+    'pt': 'pt',
+    'portuguese': 'pt',
+    'por': 'pt',
+    'ru': 'ru',
+    'russian': 'ru',
+    'rus': 'ru',
+    'ja': 'ja',
+    'japanese': 'ja',
+    'jpn': 'ja',
+    'ko': 'ko',
+    'korean': 'ko',
+    'kor': 'ko',
+    'zh': 'zh',
+    'chinese': 'zh',
+    'zho': 'zh',
+    'ar': 'ar',
+    'arabic': 'ar',
+    'ara': 'ar',
+    'hi': 'hi',
+    'hindi': 'hi',
+    'hin': 'hi',
+    'mr': 'mr',
+    'marathi': 'mr',
+    'mar': 'mr',
+    'bn': 'bn',
+    'bengali': 'bn',
+    'ben': 'bn',
+    'ta': 'ta',
+    'tamil': 'ta',
+    'tam': 'ta',
+    'te': 'te',
+    'telugu': 'te',
+    'tel': 'te',
+    'kn': 'kn',
+    'kannada': 'kn',
+    'kan': 'kn',
+    'ml': 'ml',
+    'malayalam': 'ml',
+    'mal': 'ml',
+    'gu': 'gu',
+    'gujarati': 'gu',
+    'guj': 'gu',
+    'pa': 'pa',
+    'punjabi': 'pa',
+    'pan': 'pa',
+    'ur': 'ur',
+    'urdu': 'ur',
+    'urd': 'ur'
+  };
+
+  /**
+   * Get standardized language code
+   */
+  private static getStandardLanguageCode(language: string): string {
+    const lowerLanguage = language.toLowerCase();
+    return this.languageCodeMap[lowerLanguage] || language;
+  }
+
+  /**
    * Parse CSV file and extract translation data
    */
   static async parseCsv(filePath: string): Promise<ParsedCsvData> {
@@ -43,10 +120,10 @@ export class CsvParser {
           results.push(row);
         })
         .on('end', () => {
-          // Extract language codes from headers
-          const languages = headers.filter(header => 
-            header !== 'path' && header !== 'description'
-          );
+          // Extract language codes from headers and standardize them
+          const languages = headers
+            .filter(header => header !== 'path' && header !== 'description')
+            .map(lang => CsvParser.getStandardLanguageCode(lang));
 
           resolve({
             headers,

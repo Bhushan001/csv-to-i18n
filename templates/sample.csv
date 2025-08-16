@@ -1,4 +1,4 @@
-path,description,eng,mr
+path,description,en,mr
 common.loading,Loading text shown during data fetch,Loading...,लोड होत आहे...
 common.error,Error message text,An error occurred,एक त्रुटी आली
 common.success,Success message text,Success,यशस्वी
