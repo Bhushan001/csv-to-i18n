@@ -176,7 +176,8 @@ async function main(): Promise<void> {
     }
 
   } catch (error) {
-    console.error('❌ Error:', error.message);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    console.error('❌ Error:', errorMessage);
     process.exit(1);
   }
 }

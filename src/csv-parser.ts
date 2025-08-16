@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as csv from 'csv-parser';
+import csv from 'csv-parser';
 import { CsvRow, ParsedCsvData } from './types';
 
 export class CsvParser {
@@ -55,7 +55,8 @@ export class CsvParser {
           });
         })
         .on('error', (error) => {
-          reject(new Error(`Error parsing CSV: ${error.message}`));
+          const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+          reject(new Error(`Error parsing CSV: ${errorMessage}`));
         });
     });
   }

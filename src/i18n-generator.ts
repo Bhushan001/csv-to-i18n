@@ -58,7 +58,8 @@ export class I18nGenerator {
       console.log('✅ i18n generation completed successfully!\n');
 
     } catch (error) {
-      console.error('❌ Error during i18n generation:', error.message);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      console.error('❌ Error during i18n generation:', errorMessage);
       throw error;
     }
   }
@@ -82,7 +83,8 @@ export class I18nGenerator {
       return validationResult;
 
     } catch (error) {
-      console.error('❌ Error during validation:', error.message);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      console.error('❌ Error during validation:', errorMessage);
       throw error;
     }
   }
@@ -105,7 +107,8 @@ export class I18nGenerator {
       try {
         await this.generate();
       } catch (error) {
-        console.error('❌ Error during regeneration:', error.message);
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        console.error('❌ Error during regeneration:', errorMessage);
       }
     });
 
@@ -133,7 +136,8 @@ export class I18nGenerator {
       console.log(`✅ Successfully exported to: ${outputCsvPath}\n`);
 
     } catch (error) {
-      console.error('❌ Error during export:', error.message);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      console.error('❌ Error during export:', errorMessage);
       throw error;
     }
   }
