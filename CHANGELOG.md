@@ -1,3 +1,14 @@
+## [1.0.1] - 2025-08-16
+
+### Added
+- Initial release
+
+### Changed
+- None
+
+### Fixed
+- None
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
