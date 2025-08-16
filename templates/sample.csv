@@ -1,0 +1,75 @@
+path,description,eng,mr
+common.loading,Loading text shown during data fetch,Loading...,लोड होत आहे...
+common.error,Error message text,An error occurred,एक त्रुटी आली
+common.success,Success message text,Success,यशस्वी
+common.cancel,Cancel button text,Cancel,रद्द करा
+common.save,Save button text,Save,जतन करा
+common.delete,Delete button text,Delete,हटवा
+common.edit,Edit button text,Edit,संपादित करा
+common.add,Add button text,Add,जोडा
+common.search,Search input placeholder,Search,शोधा
+common.filter,Filter button text,Filter,फिल्टर
+common.clear,Clear button text,Clear,साफ करा
+common.back,Back button text,Back,मागे
+common.next,Next button text,Next,पुढे
+common.previous,Previous button text,Previous,मागील
+common.submit,Submit button text,Submit,सबमिट करा
+common.close,Close button text,Close,बंद करा
+common.yes,Yes button text,Yes,होय
+common.no,No button text,No,नाही
+common.confirm,Confirm button text,Confirm,पुष्टी करा
+common.actions,Actions column header,Actions,कृती
+auth.login,Login button text,Login,लॉगिन
+auth.logout,Logout button text,Logout,लॉगआउट
+auth.signup,Sign up button text,Sign Up,साइन अप
+auth.username,Username input label,Username,वापरकर्तानाव
+auth.password,Password input label,Password,पासवर्ड
+auth.email,Email input label,Email,ईमेल
+auth.firstName,First name input label,First Name,पहिले नाव
+auth.lastName,Last name input label,Last Name,आडनाव
+auth.forgotPassword,Forgot password link text,Forgot Password?,पासवर्ड विसरलात?
+auth.rememberMe,Remember me checkbox label,Remember Me,मला लक्षात ठेवा
+auth.loginError,Login error message,Invalid username or password,अवैध वापरकर्तानाव किंवा पासवर्ड
+auth.loginSuccess,Login success message,Login successful,लॉगिन यशस्वी
+auth.logoutSuccess,Logout success message,Logout successful,लॉगआउट यशस्वी
+navigation.dashboard,Dashboard menu item,Dashboard,डॅशबोर्ड
+navigation.members,Members menu item,Members,सदस्य
+navigation.deposits,Deposits menu item,Deposits,ठेवी
+navigation.loans,Loans menu item,Loans,कर्ज
+navigation.reports,Reports menu item,Reports,अहवाल
+navigation.settings,Settings menu item,Settings,सेटिंग्ज
+navigation.profile,Profile menu item,Profile,प्रोफाइल
+dashboard.title,Dashboard page title,Dashboard,डॅशबोर्ड
+dashboard.welcome,Welcome message,Welcome to Sanchay,संचय मध्ये आपले स्वागत आहे
+dashboard.totalMembers,Total members label,Total Members,एकूण सदस्य
+dashboard.totalDeposits,Total deposits label,Total Deposits,एकूण ठेवी
+dashboard.totalLoans,Total loans label,Total Loans,एकूण कर्ज
+dashboard.recentActivity,Recent activity label,Recent Activity,अलीकडील क्रियाकलाप
+members.title,Members page title,Members,सदस्य
+members.addMember,Add member button,Add Member,सदस्य जोडा
+members.editMember,Edit member button,Edit Member,सदस्य संपादित करा
+members.memberDetails,Member details label,Member Details,सदस्य तपशील
+members.memberId,Member ID label,Member ID,सदस्य आयडी
+members.name,Name label,Name,नाव
+members.phone,Phone label,Phone,फोन
+members.address,Address label,Address,पत्ता
+members.joinDate,Join date label,Join Date,सामील होण्याची तारीख
+members.status,Status label,Status,स्थिती
+deposits.title,Deposits page title,Deposits,ठेवी
+deposits.addDeposit,Add deposit button,Add Deposit,ठेव जोडा
+deposits.editDeposit,Edit deposit button,Edit Deposit,ठेव संपादित करा
+deposits.depositDetails,Deposit details label,Deposit Details,ठेव तपशील
+deposits.amount,Amount label,Amount,रक्कम
+deposits.type,Type label,Type,प्रकार
+deposits.date,Date label,Date,तारीख
+deposits.interest,Interest label,Interest,व्याज
+deposits.balance,Balance label,Balance,शिल्लक
+loans.title,Loans page title,Loans,कर्ज
+loans.addLoan,Add loan button,Add Loan,कर्ज जोडा
+loans.editLoan,Edit loan button,Edit Loan,कर्ज संपादित करा
+loans.loanDetails,Loan details label,Loan Details,कर्ज तपशील
+loans.principal,Principal label,Principal,मुद्दल
+loans.interest,Interest label,Interest,व्याज
+loans.term,Term label,Term,मुदत
+loans.emi,EMI label,EMI,ईएमआय
+loans.status,Status label,Status,स्थिती
