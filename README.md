@@ -1,11 +1,11 @@
-# @sanchay/i18n-csv-generator
+# @bhushan001/i18n-csv-generator
 
-[![npm version](https://badge.fury.io/js/%40sanchay%2Fi18n-csv-generator.svg)](https://badge.fury.io/js/%40sanchay%2Fi18n-csv-generator)
-[![npm downloads](https://img.shields.io/npm/dm/@sanchay/i18n-csv-generator.svg)](https://www.npmjs.com/package/@sanchay/i18n-csv-generator)
+[![npm version](https://badge.fury.io/js/%40bhushan001%2Fi18n-csv-generator.svg)](https://badge.fury.io/js/%40bhushan001%2Fi18n-csv-generator)
+[![npm downloads](https://img.shields.io/npm/dm/%40bhushan001%2Fi18n-csv-generator.svg)](https://www.npmjs.com/package/%40bhushan001%2Fi18n-csv-generator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-4.9+-blue.svg)](https://www.typescriptlang.org/)
 
-A powerful Node.js tool to convert CSV files to i18n JSON files for Angular applications. Perfect for business users who need to manage translations without touching code.
+A powerful Node.js tool to convert CSV files to i18n JSON files for JavaScript applications (React, Vue, Angular, etc.). Perfect for business users who need to manage translations without touching code.
 
 ## 📋 Table of Contents
 
@@ -24,13 +24,13 @@ A powerful Node.js tool to convert CSV files to i18n JSON files for Angular appl
 ## 🚀 Installation
 
 ```bash
-npm install @sanchay/i18n-csv-generator
+npm install @bhushan001/i18n-csv-generator
 ```
 
 ### Global Installation (CLI)
 
 ```bash
-npm install -g @sanchay/i18n-csv-generator
+npm install -g @bhushan001/i18n-csv-generator
 ```
 
 ## ⚡ Quick Start
@@ -51,7 +51,7 @@ npx i18n-generator watch --input translations.csv --output src/assets/i18n
 ### Programmatic Usage
 
 ```typescript
-import { I18nGenerator } from '@sanchay/i18n-csv-generator';
+import { I18nGenerator } from '@bhushan001/i18n-csv-generator';
 
 const generator = new I18nGenerator({
   inputFile: 'translations.csv',

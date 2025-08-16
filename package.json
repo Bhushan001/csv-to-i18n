@@ -1,7 +1,7 @@
 {
-  "name": "@sanchay/i18n-csv-generator",
+  "name": "@bhushan001/i18n-csv-generator",
   "version": "1.0.0",
-  "description": "Convert CSV files to i18n JSON files for Angular applications",
+  "description": "Convert CSV files to i18n JSON files for JavaScript applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
@@ -21,8 +21,12 @@
     "translation",
     "csv",
     "json",
+    "javascript",
+    "react",
+    "vue",
     "angular",
-    "localization"
+    "localization",
+    "multilingual"
   ],
   "author": "Sanchay Team",
   "license": "MIT",
@@ -48,10 +52,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/sanchay/i18n-csv-generator.git"
+    "url": "https://github.com/bhushan001/csv-to-i18n.git"
   },
   "bugs": {
-    "url": "https://github.com/sanchay/i18n-csv-generator/issues"
+    "url": "https://github.com/bhushan001/csv-to-i18n/issues"
   },
-  "homepage": "https://github.com/sanchay/i18n-csv-generator#readme"
+  "homepage": "https://github.com/bhushan001/csv-to-i18n#readme"
 }
