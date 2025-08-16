@@ -1,3 +1,14 @@
+## [1.1.0] - 2025-08-16
+
+### Added
+- Initial release
+
+### Changed
+- None
+
+### Fixed
+- None
+
 ## [1.0.2] - 2025-08-16
 
 ### Added
