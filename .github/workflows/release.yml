@@ -1,0 +1,69 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build project
+        run: npm run build
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ## What's Changed
+            
+            ### Features
+            - Convert CSV files to i18n JSON files for JavaScript applications
+            - CLI tool with validation and watch mode
+            - Framework-agnostic (React, Vue, Angular, etc.)
+            - TypeScript support with comprehensive type definitions
+            
+            ### Installation
+            ```bash
+            npm install @bhushan001/i18n-csv-generator
+            ```
+            
+            ### Usage
+            ```bash
+            # Generate JSON files from CSV
+            npx i18n-generator generate --input translations.csv --output src/assets/i18n
+            
+            # Validate CSV file
+            npx i18n-generator validate --input translations.csv
+            
+            # Watch for changes
+            npx i18n-generator watch --input translations.csv --output src/assets/i18n
+            ```
+          draft: false
+          prerelease: false
