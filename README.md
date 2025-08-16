@@ -530,6 +530,83 @@ Enable debug logging:
 I18N_GENERATOR_DEBUG=true npx i18n-generator generate --input translations.csv --output src/assets/i18n
 ```
 
+## 🚀 Get Involved & Contribute
+
+We'd love your help to make this tool even better! Whether you're a developer, designer, or just passionate about internationalization, there are many ways to contribute.
+
+### 💡 Request Features
+
+Have an idea for a new feature? We want to hear it! 
+
+- 🎯 **Create a Feature Request**: [Open an issue](https://github.com/bhushan001/csv-to-i18n/issues/new?template=feature_request.md) with the "Feature Request" template
+- 💬 **Discuss Ideas**: Join our [GitHub Discussions](https://github.com/bhushan001/csv-to-i18n/discussions) to brainstorm with the community
+- 📝 **Share Use Cases**: Tell us how you're using the tool and what could make it better
+
+**Popular Feature Requests:**
+- 🔄 Support for more file formats (Excel, Google Sheets)
+- 🌐 Integration with translation services (Google Translate, DeepL)
+- 📊 Advanced validation rules and custom validators
+- 🎨 Web UI for non-technical users
+- 🔌 Plugin system for custom transformations
+
+### 🛠️ Contribute Code
+
+Ready to roll up your sleeves? Here's how to get started:
+
+#### Quick Start for Contributors
+
+```bash
+# Fork and clone the repository
+git clone https://github.com/YOUR_USERNAME/csv-to-i18n.git
+cd csv-to-i18n
+
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+
+# Run tests
+npm test
+
+# Start development mode
+npm run dev
+```
+
+#### Areas We Need Help With
+
+- 🧪 **Testing**: Add more test cases, improve coverage
+- 📚 **Documentation**: Improve README, add examples, create tutorials
+- 🐛 **Bug Fixes**: Help squash bugs and improve reliability
+- ⚡ **Performance**: Optimize CSV parsing and JSON generation
+- 🌍 **Internationalization**: Add support for more languages and formats
+- 🎨 **UI/UX**: Design improvements for CLI and future web interface
+
+#### Contribution Guidelines
+
+1. **Fork the repository** and create a feature branch
+2. **Follow the existing code style** and add tests for new features
+3. **Update documentation** for any new functionality
+4. **Submit a pull request** with a clear description of changes
+5. **Join the discussion** in the PR comments
+
+### 🎉 Recognition
+
+Contributors will be:
+- 📝 **Listed in our contributors file**
+- 🏆 **Featured in release notes**
+- 🎯 **Mentioned in our documentation**
+- 💝 **Given early access to new features**
+
+### 🤝 Community
+
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/bhushan001/csv-to-i18n/discussions)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/bhushan001/csv-to-i18n/issues)
+- 📧 **Contact**: Open an issue or start a discussion
+- ⭐ **Star the repo**: Show your support!
+
+---
+
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
@@ -538,8 +615,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ```bash
 # Clone repository
-git clone https://github.com/sanchay/i18n-csv-generator.git
-cd i18n-csv-generator
+git clone https://github.com/bhushan001/csv-to-i18n.git
+cd csv-to-i18n
 
 # Install dependencies
 npm install
@@ -567,10 +644,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- 📧 **Email**: support@sanchay.com
-- 🐛 **Issues**: [GitHub Issues](https://github.com/sanchay/i18n-csv-generator/issues)
-- 📖 **Documentation**: [GitHub Wiki](https://github.com/sanchay/i18n-csv-generator/wiki)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/sanchay/i18n-csv-generator/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/bhushan001/csv-to-i18n/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/bhushan001/csv-to-i18n/discussions)
+- 📖 **Documentation**: [GitHub Wiki](https://github.com/bhushan001/csv-to-i18n/wiki)
+- 📧 **Contact**: Open an issue or start a discussion
 
 ## 📈 Changelog
 
@@ -578,4 +655,4 @@ See [CHANGELOG.md](CHANGELOG.md) for a list of changes and version history.
 
 ---
 
-Made with ❤️ by the [Sanchay Team](https://github.com/sanchay)
+Made with ❤️ by [Bhushan Gadekar](https://github.com/bhushan001)
