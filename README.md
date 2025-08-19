@@ -7,7 +7,7 @@
 
 A powerful Node.js tool to convert CSV files to i18n JSON files for JavaScript applications (React, Vue, Angular, etc.). Perfect for business users who need to manage translations without touching code.
 
-**🆕 New in v1.2.0**: Generate CSV templates from existing English JSON files! Perfect for teams that already have English translations and want to add other languages.
+**🆕 New in v1.3.1**: Enhanced JSON generation with better handling of empty values and improved validation! Perfect for teams that need robust translation management with comprehensive validation.
 
 ## 📋 Table of Contents
 
