@@ -209,4 +209,33 @@ export class I18nGenerator {
       throw error;
     }
   }
+
+  /**
+   * Validate JSON files against CSV data to ensure consistency
+   */
+  static async validateJsonAgainstCsv(
+    csvFilePath: string,
+    jsonDir: string
+  ): Promise<void> {
+    try {
+      console.log('🔍 Validating JSON files against CSV data...\n');
+
+      // Parse CSV to get rows and languages
+      const csvData = await CsvParser.parseCsv(csvFilePath);
+      
+      // Validate JSON files against CSV
+      const validationResult = Validator.validateJsonAgainstCsv(
+        csvData.rows,
+        jsonDir,
+        csvData.languages
+      );
+
+      Validator.printJsonValidationResults(validationResult, jsonDir);
+
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      console.error('❌ Error validating JSON against CSV:', errorMessage);
+      throw error;
+    }
+  }
 }

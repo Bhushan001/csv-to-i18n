@@ -1,0 +1,8 @@
+path,description,eng,mr
+common.loading,Loading text shown during data fetch,Loading...,लोड होत आहे...
+common.error,Error message text,An error occurred,एक त्रुटी आली
+auth.login,Login button text,Login,लॉगिन
+auth.logout,Logout button text,Logout,लॉगआउट
+navigation.dashboard,Dashboard menu item,Dashboard,डॅशबोर्ड
+members.title,Members page title,Members,सदस्य
+members.addMember,Add member button,Add Member,सदस्य जोडा

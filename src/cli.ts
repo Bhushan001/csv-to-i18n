@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { I18nGenerator, GeneratorConfig } from './index';
+import { I18nGenerator, GeneratorConfig, CsvParser, Validator } from './index';
 import * as path from 'path';
 
 // Parse command line arguments
@@ -16,6 +16,7 @@ Usage: i18n-generator <command> [options]
 Commands:
   generate    Generate JSON files from CSV
   validate    Validate CSV file only
+  validate-json Validate JSON files against CSV
   watch       Watch CSV file for changes
   export      Export JSON files to CSV
   init        Create sample CSV template
@@ -31,6 +32,7 @@ Options:
 Examples:
   i18n-generator generate --input translations.csv --output src/assets/i18n
   i18n-generator validate --input translations.csv
+  i18n-generator validate-json --input translations.csv --json-dir src/assets/i18n
   i18n-generator watch --input translations.csv --output src/assets/i18n
   i18n-generator export --input src/assets/i18n --output exported.csv
   i18n-generator init --output sample.csv
@@ -116,6 +118,22 @@ async function main(): Promise<void> {
 
         const generator = new I18nGenerator(config);
         await generator.validate();
+        break;
+      }
+
+      case 'validate-json': {
+        const inputFile = options.input || options.i;
+        const jsonDir = options['json-dir'] || options.j;
+
+        if (!inputFile || !jsonDir) {
+          console.error('❌ Error: --input (CSV file) and --json-dir (JSON directory) are required for validate-json command');
+          process.exit(1);
+        }
+
+        await I18nGenerator.validateJsonAgainstCsv(
+          path.resolve(inputFile),
+          path.resolve(jsonDir)
+        );
         break;
       }
 

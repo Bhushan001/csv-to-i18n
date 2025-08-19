@@ -51,6 +51,9 @@ npx i18n-generator watch --input translations.csv --output src/assets/i18n
 
 # Generate CSV from existing English JSON file
 npx i18n-generator from-json --input en.json --output translations.csv --languages en,mr,es
+
+# Validate JSON files against CSV
+npx i18n-generator validate-json --input translations.csv --json-dir src/assets/i18n
 ```
 
 ### Programmatic Usage
@@ -172,6 +175,23 @@ i18n-generator validate --input <csv-file>
 ```bash
 i18n-generator validate --input translations.csv
 ```
+
+### Validate JSON Files
+
+```bash
+i18n-generator validate-json --input <csv-file> --json-dir <json-directory>
+```
+
+**Options:**
+- `--input, -i` (required): Path to CSV file
+- `--json-dir, -j` (required): Directory containing JSON files
+
+**Example:**
+```bash
+i18n-generator validate-json --input translations.csv --json-dir src/assets/i18n
+```
+
+This command validates that all JSON files have the same translation keys as the CSV file, ensuring consistency between source and generated files.
 
 ### Watch Mode
 
@@ -348,9 +368,30 @@ await I18nGenerator.generateCsvFromEnglishJson(
 );
 ```
 
+##### validateJsonAgainstCsv()
+
+Validates JSON files against CSV data to ensure consistency between source and generated files.
+
+```typescript
+static validateJsonAgainstCsv(
+  csvFilePath: string,
+  jsonDir: string
+): Promise<void>
+```
+
 **Parameters:**
-- `outputPath`: Path to output CSV file
-- `languages`: Array of language codes (default: `['eng', 'mr']`)
+- `csvFilePath`: Path to CSV file
+- `jsonDir`: Directory containing JSON files
+
+**Returns:** Promise that resolves when validation is complete
+
+**Example:**
+```typescript
+await I18nGenerator.validateJsonAgainstCsv(
+  'translations.csv',
+  'src/assets/i18n'
+);
+```
 
 ## 🔄 Workflows
 
@@ -407,6 +448,24 @@ common.error,Error - "An error occurred",An error occurred,एक त्रु�
 auth.login,Login - "Login",Login,लॉगिन,Iniciar sesión
 auth.logout,Logout - "Logout",Logout,लॉगआउट,Cerrar sesión
 ```
+
+### Workflow 3: Validating JSON Consistency
+
+To ensure your JSON files are consistent with your CSV source:
+
+1. **Generate JSON files from CSV**:
+   ```bash
+   i18n-generator generate --input translations.csv --output src/assets/i18n
+   ```
+
+2. **Validate JSON files against CSV**:
+   ```bash
+   i18n-generator validate-json --input translations.csv --json-dir src/assets/i18n
+   ```
+
+3. **Fix any inconsistencies** if validation fails, then regenerate JSON files
+
+This workflow helps maintain consistency between your CSV source and generated JSON files, especially useful in CI/CD pipelines or when multiple team members are working on translations.
 
 ## 📊 Examples
 

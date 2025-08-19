@@ -176,4 +176,133 @@ export class Validator {
       isValid: result.isValid
     };
   }
+
+  /**
+   * Validate JSON files against CSV data to ensure consistency
+   */
+  static validateJsonAgainstCsv(
+    csvRows: CsvRow[],
+    jsonDir: string,
+    languages: string[]
+  ): ValidationResult {
+    const errors: ValidationError[] = [];
+    const warnings: ValidationWarning[] = [];
+
+    // Get all paths from CSV
+    const csvPaths = new Set(csvRows.map(row => row.path));
+
+    // Check each language file
+    languages.forEach(lang => {
+      const jsonFilePath = `${jsonDir}/${lang}.json`;
+      
+      try {
+        const fs = require('fs');
+        if (!fs.existsSync(jsonFilePath)) {
+          errors.push({
+            row: 0,
+            column: lang,
+            message: `JSON file not found: ${jsonFilePath}`,
+            value: jsonFilePath
+          });
+          return;
+        }
+
+        const jsonContent = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
+        const jsonPaths = new Set<string>();
+
+        // Flatten JSON to get all paths
+        this.flattenJsonPaths(jsonContent, '', jsonPaths);
+
+        // Check for missing paths in JSON (paths in CSV but not in JSON)
+        csvPaths.forEach(csvPath => {
+          if (!jsonPaths.has(csvPath)) {
+            errors.push({
+              row: 0,
+              column: lang,
+              message: `Missing translation key in ${lang}.json: ${csvPath}`,
+              value: csvPath
+            });
+          }
+        });
+
+        // Check for extra paths in JSON (paths in JSON but not in CSV)
+        jsonPaths.forEach(jsonPath => {
+          if (!csvPaths.has(jsonPath)) {
+            warnings.push({
+              row: 0,
+              column: lang,
+              message: `Extra translation key in ${lang}.json (not in CSV): ${jsonPath}`,
+              value: jsonPath
+            });
+          }
+        });
+
+      } catch (error) {
+        errors.push({
+          row: 0,
+          column: lang,
+          message: `Error reading ${lang}.json: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          value: jsonFilePath
+        });
+      }
+    });
+
+    return {
+      isValid: errors.length === 0,
+      errors,
+      warnings
+    };
+  }
+
+  /**
+   * Flatten JSON object to get all paths
+   */
+  private static flattenJsonPaths(obj: any, prefix: string, paths: Set<string>): void {
+    for (const [key, value] of Object.entries(obj)) {
+      const currentPath = prefix ? `${prefix}.${key}` : key;
+
+      if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+        this.flattenJsonPaths(value, currentPath, paths);
+      } else {
+        paths.add(currentPath);
+      }
+    }
+  }
+
+  /**
+   * Print JSON validation results to console
+   */
+  static printJsonValidationResults(result: ValidationResult, jsonDir: string): void {
+    console.log('\n=== JSON Files Validation Results ===\n');
+
+    if (result.errors.length > 0) {
+      console.log('❌ ERRORS:');
+      result.errors.forEach(error => {
+        console.log(`  ${error.message}`);
+        if (error.value) {
+          console.log(`    Key: "${error.value}"`);
+        }
+      });
+      console.log('');
+    }
+
+    if (result.warnings.length > 0) {
+      console.log('⚠️  WARNINGS:');
+      result.warnings.forEach(warning => {
+        console.log(`  ${warning.message}`);
+        if (warning.value) {
+          console.log(`    Key: "${warning.value}"`);
+        }
+      });
+      console.log('');
+    }
+
+    if (result.isValid) {
+      console.log('✅ All JSON files are consistent with CSV data!');
+    } else {
+      console.log('❌ JSON files have inconsistencies that need to be fixed.');
+    }
+
+    console.log('');
+  }
 }

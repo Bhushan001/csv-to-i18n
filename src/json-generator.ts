@@ -20,9 +20,8 @@ export class JsonGenerator {
       
       languages.forEach(lang => {
         const translation = row[lang] || '';
-        if (translation.trim()) {
-          this.setNestedValue(output[lang], pathParts, translation);
-        }
+        // Always set the value, even if it's empty, to preserve the structure
+        this.setNestedValue(output[lang], pathParts, translation);
       });
     });
 

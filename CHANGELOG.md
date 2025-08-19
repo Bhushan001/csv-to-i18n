@@ -1,3 +1,20 @@
+## [1.3.0] - 2025-01-27
+
+### Added
+- **New `validate-json` command**: Validate JSON files against CSV data for consistency
+- **JSON consistency checking**: Ensures all translation keys match between CSV and JSON files
+- **Missing key detection**: Identifies translation keys present in CSV but missing in JSON
+- **Extra key warnings**: Warns about translation keys in JSON but not in CSV
+- **Comprehensive validation**: Validates all language files against CSV source
+
+### Changed
+- Enhanced validation system with JSON consistency checks
+- Improved error reporting for missing and extra translation keys
+- Updated documentation with new validation workflow
+
+### Fixed
+- None
+
 ## [1.2.0] - 2025-01-27
 
 ### Added
