@@ -7,6 +7,8 @@
 
 A powerful Node.js tool to convert CSV files to i18n JSON files for JavaScript applications (React, Vue, Angular, etc.). Perfect for business users who need to manage translations without touching code.
 
+**🆕 New in v1.2.0**: Generate CSV templates from existing English JSON files! Perfect for teams that already have English translations and want to add other languages.
+
 ## 📋 Table of Contents
 
 - [Installation](#installation)
@@ -46,6 +48,9 @@ npx i18n-generator validate --input translations.csv
 
 # Watch for changes
 npx i18n-generator watch --input translations.csv --output src/assets/i18n
+
+# Generate CSV from existing English JSON file
+npx i18n-generator from-json --input en.json --output translations.csv --languages en,mr,es
 ```
 
 ### Programmatic Usage
@@ -212,6 +217,22 @@ i18n-generator init --output <csv-file>
 i18n-generator init --output sample.csv
 ```
 
+### Generate CSV from English JSON
+
+```bash
+i18n-generator from-json --input <english-json-file> --output <csv-file> [--languages <lang1,lang2,...>]
+```
+
+**Options:**
+- `--input, -i` (required): Path to existing English JSON file
+- `--output, -o` (required): Output CSV file path
+- `--languages, -l` (optional): Target languages (default: `en,mr`)
+
+**Example:**
+```bash
+i18n-generator from-json --input src/assets/i18n/en.json --output translations.csv --languages en,mr,es
+```
+
 ## 📚 API Reference
 
 ### I18nGenerator
@@ -299,18 +320,97 @@ static createSampleCsv(outputPath: string, languages?: string[]): void
 - `outputPath`: Path to output CSV file
 - `languages`: Array of language codes (default: `['eng', 'mr']`)
 
+##### generateCsvFromEnglishJson()
+
+Generates CSV from existing English JSON file. Useful when you already have English translations and want to add other languages.
+
+```typescript
+static generateCsvFromEnglishJson(
+  englishJsonPath: string,
+  outputCsvPath: string,
+  targetLanguages?: string[]
+): Promise<void>
+```
+
+**Parameters:**
+- `englishJsonPath`: Path to existing English JSON file
+- `outputCsvPath`: Path to output CSV file
+- `targetLanguages`: Array of target language codes (default: `['en', 'mr']`)
+
+**Returns:** Promise that resolves when CSV generation is complete
+
+**Example:**
+```typescript
+await I18nGenerator.generateCsvFromEnglishJson(
+  'src/assets/i18n/en.json',
+  'translations.csv',
+  ['en', 'mr', 'es']
+);
+```
+
+**Parameters:**
+- `outputPath`: Path to output CSV file
+- `languages`: Array of language codes (default: `['eng', 'mr']`)
+
+## 🔄 Workflows
+
+### Workflow 1: Starting from Scratch
+
+1. **Create CSV template**: `i18n-generator init --output translations.csv`
+2. **Add translations**: Edit the CSV file with your translations
+3. **Generate JSON files**: `i18n-generator generate --input translations.csv --output src/assets/i18n`
+
+### Workflow 2: Adding Languages to Existing English Translations
+
+If you already have English translations in JSON format and want to add other languages:
+
+1. **Generate CSV from English JSON**:
+   ```bash
+   i18n-generator from-json --input src/assets/i18n/en.json --output translations.csv --languages en,mr,es
+   ```
+
+2. **Add translations for other languages**: Open the CSV file and fill in translations for `mr` and `es` columns
+
+3. **Generate all JSON files**:
+   ```bash
+   i18n-generator generate --input translations.csv --output src/assets/i18n
+   ```
+
+**Example English JSON (`en.json`)**:
+```json
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout"
+  }
+}
+```
+
+**Generated CSV (`translations.csv`)**:
+```csv
+path,description,en,mr,es
+common.loading,Loading - "Loading...",Loading...,,
+common.error,Error - "An error occurred",An error occurred,,
+auth.login,Login - "Login",Login,,
+auth.logout,Logout - "Logout",Logout,,
+```
+
+**After adding translations**:
+```csv
+path,description,en,mr,es
+common.loading,Loading - "Loading...",Loading...,लोड होत आहे...,Cargando...
+common.error,Error - "An error occurred",An error occurred,एक त्रुटी आली,Se produjo un error
+auth.login,Login - "Login",Login,लॉगिन,Iniciar sesión
+auth.logout,Logout - "Logout",Logout,लॉगआउट,Cerrar sesión
+```
+
 ## 📊 Examples
 
 ### Input CSV
-
-```csv
-path,description,eng,mr
-common.loading,Loading text,Loading...,लोड होत आहे...
-auth.login,Login button,Login,लॉगिन
-navigation.dashboard,Dashboard menu,Dashboard,डॅशबोर्ड
-members.title,Members page title,Members,सदस्य
-members.addMember,Add member button,Add Member,सदस्य जोडा
-```
 
 ### Output JSON Files
 

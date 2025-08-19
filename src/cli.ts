@@ -19,11 +19,13 @@ Commands:
   watch       Watch CSV file for changes
   export      Export JSON files to CSV
   init        Create sample CSV template
+  from-json   Generate CSV from existing English JSON file
 
 Options:
   --input, -i     Input CSV file path
   --output, -o    Output directory for JSON files
   --backup, -b    Create backup of existing files
+  --languages, -l Target languages for CSV generation
   --help, -h      Show this help message
 
 Examples:
@@ -32,6 +34,7 @@ Examples:
   i18n-generator watch --input translations.csv --output src/assets/i18n
   i18n-generator export --input src/assets/i18n --output exported.csv
   i18n-generator init --output sample.csv
+  i18n-generator from-json --input en.json --output translations.csv --languages en,mr,es
 `);
 }
 
@@ -166,6 +169,26 @@ async function main(): Promise<void> {
         }
 
         I18nGenerator.createSampleCsv(path.resolve(outputFile));
+        break;
+      }
+
+      case 'from-json': {
+        const inputFile = options.input || options.i;
+        const outputFile = options.output || options.o;
+        const languages = options.languages || options.l;
+
+        if (!inputFile || !outputFile) {
+          console.error('❌ Error: --input (English JSON file) and --output (CSV file) are required for from-json command');
+          process.exit(1);
+        }
+
+        const targetLanguages = languages ? languages.split(',') : ['en', 'mr'];
+        
+        await I18nGenerator.generateCsvFromEnglishJson(
+          path.resolve(inputFile),
+          path.resolve(outputFile),
+          targetLanguages
+        );
         break;
       }
 

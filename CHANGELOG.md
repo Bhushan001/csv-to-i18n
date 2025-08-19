@@ -1,3 +1,18 @@
+## [1.2.0] - 2025-01-27
+
+### Added
+- **New `from-json` command**: Generate CSV from existing English JSON file
+- **Workflow for existing translations**: Support for teams that already have English translations
+- **Automatic description generation**: Smart descriptions based on translation keys and content
+- **Multi-language CSV templates**: Generate CSV with multiple target languages
+
+### Changed
+- Enhanced CLI help with new command examples
+- Improved documentation with new workflow examples
+
+### Fixed
+- None
+
 ## [1.1.0] - 2025-08-16
 
 ### Added

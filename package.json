@@ -1,6 +1,6 @@
 {
   "name": "@bhushan001/i18n-csv-generator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Convert CSV files to i18n JSON files for JavaScript applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -164,4 +164,129 @@ export class JsonGenerator {
 
     return csvRows.join('\n');
   }
+
+  /**
+   * Generate CSV from existing English JSON file
+   * This is useful when users already have English translations and want to add other languages
+   */
+  static async generateCsvFromEnglishJson(
+    englishJsonPath: string,
+    outputCsvPath: string,
+    targetLanguages: string[] = ['en', 'mr']
+  ): Promise<void> {
+    // Check if English JSON file exists
+    if (!fs.existsSync(englishJsonPath)) {
+      throw new Error(`English JSON file not found: ${englishJsonPath}`);
+    }
+
+    // Read and parse English JSON
+    const englishContent = JSON.parse(fs.readFileSync(englishJsonPath, 'utf8'));
+    
+    // Flatten the JSON to get all paths
+    const allPaths = new Set<string>();
+    const englishTranslations: { [path: string]: string } = {};
+    
+    this.flattenJsonForEnglish(englishContent, '', allPaths, englishTranslations);
+
+    // Generate CSV content with English translations pre-filled
+    const csvContent = this.generateCsvFromEnglishTranslations(
+      allPaths, 
+      englishTranslations, 
+      targetLanguages
+    );
+
+    // Write CSV file
+    fs.writeFileSync(outputCsvPath, csvContent, 'utf8');
+    
+    console.log(`✅ Generated CSV template from English JSON`);
+    console.log(`📁 Output: ${outputCsvPath}`);
+    console.log(`🌍 Languages: ${targetLanguages.join(', ')}`);
+    console.log(`📝 Translation keys: ${allPaths.size}`);
+    console.log(`\n💡 Next steps:`);
+    console.log(`   1. Open the CSV file and add translations for other languages`);
+    console.log(`   2. Run: i18n-generator generate --input ${outputCsvPath} --output <output-dir>`);
+  }
+
+  /**
+   * Generate CSV content from English translations
+   */
+  private static generateCsvFromEnglishTranslations(
+    allPaths: Set<string>,
+    englishTranslations: { [path: string]: string },
+    languages: string[]
+  ): string {
+    const headers = ['path', 'description', ...languages];
+    const csvRows = [headers.join(',')];
+
+    for (const path of Array.from(allPaths).sort()) {
+      const englishText = englishTranslations[path] || '';
+      const description = this.generateDescription(path, englishText);
+      
+      const row = [path, description];
+      
+      languages.forEach(lang => {
+        let translation = '';
+        if (lang === 'en') {
+          translation = englishText;
+        }
+        // Escape commas and quotes in CSV
+        const escapedTranslation = translation.replace(/"/g, '""');
+        row.push(`"${escapedTranslation}"`);
+      });
+
+      csvRows.push(row.join(','));
+    }
+
+    return csvRows.join('\n');
+  }
+
+  /**
+   * Flatten JSON for English translations (simplified version)
+   */
+  private static flattenJsonForEnglish(
+    obj: any, 
+    prefix: string, 
+    allPaths: Set<string>, 
+    englishTranslations: { [path: string]: string }
+  ): void {
+    for (const [key, value] of Object.entries(obj)) {
+      const currentPath = prefix ? `${prefix}.${key}` : key;
+
+      if (typeof value === 'object' && value !== null) {
+        this.flattenJsonForEnglish(value, currentPath, allPaths, englishTranslations);
+      } else {
+        allPaths.add(currentPath);
+        englishTranslations[currentPath] = String(value);
+      }
+    }
+  }
+
+  /**
+   * Generate a human-readable description for a translation key
+   */
+  private static generateDescription(path: string, englishText: string): string {
+    // Convert path to readable description
+    const pathParts = path.split('.');
+    const lastPart = pathParts[pathParts.length - 1];
+    
+    // Convert camelCase or kebab-case to readable text
+    const readableText = lastPart
+      .replace(/([A-Z])/g, ' $1') // Add space before capital letters
+      .replace(/[-_]/g, ' ') // Replace hyphens/underscores with spaces
+      .toLowerCase()
+      .trim();
+    
+    // Capitalize first letter
+    const capitalized = readableText.charAt(0).toUpperCase() + readableText.slice(1);
+    
+    // If we have English text, use it to create a better description
+    if (englishText) {
+      const truncatedText = englishText.length > 50 
+        ? englishText.substring(0, 50) + '...' 
+        : englishText;
+      return `${capitalized} - "${truncatedText}"`;
+    }
+    
+    return capitalized;
+  }
 }

@@ -184,4 +184,29 @@ export class I18nGenerator {
     fs.writeFileSync(outputPath, csvContent, 'utf8');
     console.log(`✅ Sample CSV template created: ${outputPath}`);
   }
+
+  /**
+   * Generate CSV from existing English JSON file
+   * This is useful when users already have English translations and want to add other languages
+   */
+  static async generateCsvFromEnglishJson(
+    englishJsonPath: string,
+    outputCsvPath: string,
+    targetLanguages: string[] = ['en', 'mr']
+  ): Promise<void> {
+    try {
+      console.log('🔄 Generating CSV from English JSON file...\n');
+      
+      await JsonGenerator.generateCsvFromEnglishJson(
+        englishJsonPath,
+        outputCsvPath,
+        targetLanguages
+      );
+
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      console.error('❌ Error generating CSV from English JSON:', errorMessage);
+      throw error;
+    }
+  }
 }
